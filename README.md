@@ -1,2 +1,2 @@
 # context-todos
-practice useReducer and createContext
+Practice useReducer and createContext

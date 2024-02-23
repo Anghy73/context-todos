@@ -1,59 +1,9 @@
 import { createContext, useReducer } from 'react'
+import { reducer, reducerInitialState } from '../reducer/reducer'
 
 export const TodosContext = createContext()
 
-const reducerInitialState = [{
-  id: 1,
-  description: 'todo1',
-  done: false
-}]
-
-const reducer = (state, action) => {
-  const { type: actionType, payload: actionPayload } = action
-
-  switch (actionType) {
-    case 'ADD_TODO': {
-      console.log(actionPayload)
-
-      return [
-        ...state,
-        {
-          id: state.length + 1,
-          description: actionPayload,
-          done: false
-        }
-      ]
-    }
-  }
-}
-
 export function TodosProvider ({ children }) {
-  // const [todos, setTodos] = useState([
-  //   {
-  //     id: 1,
-  //     description: 'todo 1',
-  //     done: false
-  //   },
-  //   {
-  //     id: 2,
-  //     description: 'todo 2',
-  //     done: false
-  //   },
-  //   {
-  //     id: 3,
-  //     description: 'todo 3',
-  //     done: true
-  //   }
-  // ])
-
-  // const countTodosPending = () => {
-  //   return todos.filter(item => item.done === false).length
-  // }
-
-  // const countTodosDone = () => {
-  //   return todos.filter(item => item.done === true).length
-  // }
-
   const [state, dispatch] = useReducer(reducer, reducerInitialState)
 
   const addTodo = product => dispatch({
@@ -61,13 +11,38 @@ export function TodosProvider ({ children }) {
     payload: product
   })
 
+  const delTodo = product => dispatch({
+    type: 'DELETE_TODO',
+    payload: product
+  })
+
+  const updateTodo = product => dispatch({
+    type: 'UPDATE_TODO',
+    payload: product
+  })
+
+  const doneTodo = product => dispatch({
+    type: 'DONE_TODO',
+    payload: product
+  })
+
+  const countTodosPending = () => {
+    return state.filter(item => item.done === false).length
+  }
+
+  const countTodosDone = () => {
+    return state.filter(item => item.done === true).length
+  }
+
   return (
     <TodosContext.Provider value={{
       todos: state,
-      addTodo
-      // setTodos,
-      // countTodosPending,
-      // countTodosDone
+      addTodo,
+      delTodo,
+      updateTodo,
+      doneTodo,
+      countTodosPending,
+      countTodosDone
     }}
     >
       {children}

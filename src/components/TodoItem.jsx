@@ -3,14 +3,12 @@ import TodoUpdate from './TodoUpdate'
 import { TodosContext } from '../../context/todos'
 
 function TodoItem ({ item }) {
-  const { todos, setTodos } = useContext(TodosContext)
+  const { delTodo } = useContext(TodosContext)
 
   const handleClickDelete = () => {
-    const newTodos = todos.filter(todo => {
-      return todo.id !== item.id
-    })
-    setTodos(newTodos)
+    delTodo(item)
   }
+
   return (
     <li className='flex space-x-3 bg-sky-400 p-3 rounded'>
       <TodoUpdate item={item} />

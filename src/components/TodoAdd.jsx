@@ -9,17 +9,13 @@ function TodoAdd () {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if (value === '' || value[0] === ' ') return
+    if (value === '' || value[0] === ' ') {
+      setValue('')
+      return
+    }
+
     const { description } = Object.fromEntries(new FormData(event.target))
 
-    // setTodos([
-    //   ...todos,
-    //   {
-    //     id: todos.length + 1,
-    //     description,
-    //     done: false
-    //   }
-    // ])
     addTodo(description)
 
     setValue('')

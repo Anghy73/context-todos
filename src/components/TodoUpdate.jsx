@@ -3,7 +3,7 @@ import { TodosContext } from '../../context/todos'
 
 function TodoUpdate ({ item }) {
   const [enableEdit, setEnableEdit] = useState(true)
-  const { todos, setTodos } = useContext(TodosContext)
+  const { addTodo } = useContext(TodosContext)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -15,33 +15,34 @@ function TodoUpdate ({ item }) {
   }
 
   const handleChangeValue = (event) => {
-    const newTodos = todos.map(todo => {
-      if (todo.id === item.id) {
-        todo.description = event.target.value
-      }
-      return todo
-    })
+    // const newTodos = todos.map(todo => {
+    //   if (todo.id === item.id) {
+    //     todo.description = event.target.value
+    //   }
+    //   return todo
+    // })
 
-    setTodos(newTodos)
+    addTodo(item)
   }
 
-  const handleChangeDone = () => {
-    const newTodos = todos.map(todo => {
-      if (todo.id === item.id) {
-        todo.done = !todo.done
-      }
-      return todo
-    })
+  // const handleChangeDone = () => {
+  //   const newTodos = todos.map(todo => {
+  //     if (todo.id === item.id) {
+  //       todo.done = !todo.done
+  //     }
+  //     return todo
+  //   })
 
-    setTodos(newTodos)
-  }
+  //   setTodos(newTodos)
+  // }
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type='checkbox' name='' id='' checked={item.done} onChange={handleChangeDone} />
+      {/* <input type='checkbox' name='' id='' checked={item.done} onChange={handleChangeDone} /> */}
       <input
-        className='text-black font-semibold' style={{
-          textDecoration: item.done ? 'line-through' : ''
+        className='text-black font-semibold p-1 px-2 rounded bg-transparent focus-visible:outline-none cursor-auto border-2 border-transparent' style={{
+          textDecoration: item.done ? 'line-through' : '',
+          border: !enableEdit ? '2px solid white' : ''
         }} type='text' value={item.description} placeholder='you want to do?' onChange={handleChangeValue} readOnly={enableEdit}
       />
       <button onClick={handleClickEdit}>Edit</button>

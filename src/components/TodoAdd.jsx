@@ -4,19 +4,25 @@ import { TodosContext } from '../../context/todos'
 function TodoAdd () {
   const [value, setValue] = useState('')
 
-  const { todos, setTodos } = useContext(TodosContext)
+  const { addTodo } = useContext(TodosContext)
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    if (value === '' || value[0] === ' ') return
     const { description } = Object.fromEntries(new FormData(event.target))
-    setTodos([
-      ...todos,
-      {
-        id: todos.length + 1,
-        description,
-        done: false
-      }
-    ])
+
+    // setTodos([
+    //   ...todos,
+    //   {
+    //     id: todos.length + 1,
+    //     description,
+    //     done: false
+    //   }
+    // ])
+    addTodo(description)
+
+    setValue('')
   }
 
   const handleChange = (event) => {

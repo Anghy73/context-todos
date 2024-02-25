@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react'
-import { TodosContext } from '../../context/todos'
+import { useState } from 'react'
+import { useTodos } from '../hooks/useTodos'
 
 function TodoUpdate ({ item }) {
   const [enableEdit, setEnableEdit] = useState(true)
-  const { updateTodo, doneTodo } = useContext(TodosContext)
+  const { updateTodo, doneTodo } = useTodos()
 
   const handleSubmit = (event) => {
     event.preventDefault()

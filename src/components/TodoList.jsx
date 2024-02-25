@@ -1,9 +1,9 @@
-import { useContext } from 'react'
+import { useTodos } from '../hooks/useTodos'
+
 import TodoItem from './TodoItem'
-import { TodosContext } from '../../context/todos'
 
 function TodoList () {
-  const { todos } = useContext(TodosContext)
+  const { todos } = useTodos()
 
   return (
     <ul className='space-y-5 mt-5'>

@@ -1,8 +1,7 @@
-import { useContext } from 'react'
-import { TodosContext } from '../../context/todos'
+import { useTodos } from '../hooks/useTodos'
 
 function CountTodos () {
-  const { todos, countTodosPending, countTodosDone } = useContext(TodosContext)
+  const { todos, countTodosPending, countTodosDone } = useTodos()
 
   return (
     <div className='flex  gap-4'>

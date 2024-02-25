@@ -1,9 +1,8 @@
-import { useContext } from 'react'
+import { useTodos } from '../hooks/useTodos'
 import TodoUpdate from './TodoUpdate'
-import { TodosContext } from '../../context/todos'
 
 function TodoItem ({ item }) {
-  const { delTodo } = useContext(TodosContext)
+  const { delTodo } = useTodos()
 
   const handleClickDelete = () => {
     delTodo(item)

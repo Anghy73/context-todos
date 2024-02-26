@@ -23,15 +23,20 @@ function TodoUpdate ({ item }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type='checkbox' name='' id='' checked={item.done} onChange={handleChangeDone} />
-      <input
-        className='text-black font-semibold p-1 px-2 rounded bg-transparent focus-visible:outline-none cursor-auto border-2 border-transparent' style={{
-          textDecoration: item.done ? 'line-through' : '',
-          border: !enableEdit ? '2px solid white' : ''
-        }} type='text' value={item.description} placeholder='you want to do?' onChange={handleChangeValue} readOnly={enableEdit}
-      />
-      <button onClick={handleClickEdit}>Edit</button>
+    <form className='flex flex-1 items-center justify-between pr-2' onSubmit={handleSubmit}>
+      <div className='flex items-center'>
+        <input
+          className='w-5 h-5 rounded accent-emerald-400 bg-white' type='checkbox' name='' id='' checked={item.done} onChange={handleChangeDone}
+        />
+        <input
+          className='text-black font-semibold p-1 px-2 rounded bg-transparent focus-visible:outline-none cursor-auto border-2 border-transparent' style={{
+            opacity: item.done ? '.5' : '1',
+            textDecoration: item.done ? 'line-through' : '',
+            border: !enableEdit ? '2px solid white' : ''
+          }} type='text' value={item.description} placeholder='you want to do?' onChange={handleChangeValue} readOnly={enableEdit}
+        />
+      </div>
+      <button className='font-semibold' onClick={handleClickEdit}>Edit</button>
     </form>
   )
 }

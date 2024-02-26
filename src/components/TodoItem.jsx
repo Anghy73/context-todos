@@ -9,9 +9,9 @@ function TodoItem ({ item }) {
   }
 
   return (
-    <li className='flex space-x-3 bg-sky-400 p-3 rounded'>
+    <li className='flex justify-between space-x-3 bg-sky-400 p-3 rounded'>
       <TodoUpdate item={item} />
-      <button onClick={handleClickDelete}>Delete</button>
+      <button className='font-semibold' onClick={handleClickDelete}>Delete</button>
     </li>
   )
 }

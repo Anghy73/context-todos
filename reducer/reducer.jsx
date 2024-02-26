@@ -9,7 +9,7 @@ export const reducer = (state, action) => {
       return [
         ...state,
         {
-          id: state.length + 1,
+          id: Date.now(),
           description: actionPayload,
           done: false
         }

@@ -1,4 +1,8 @@
-export const reducerInitialState = []
+export const reducerInitialState = JSON.parse(window.localStorage.getItem('todos')) || []
+
+export const updateLocalStorage = state => {
+  window.localStorage.setItem('todos', JSON.stringify(state))
+}
 
 export const reducer = (state, action) => {
   const { type: actionType, payload: actionPayload } = action
@@ -6,7 +10,7 @@ export const reducer = (state, action) => {
 
   switch (actionType) {
     case 'ADD_TODO': {
-      return [
+      const newState = [
         ...state,
         {
           id: Date.now(),
@@ -14,29 +18,45 @@ export const reducer = (state, action) => {
           done: false
         }
       ]
+
+      updateLocalStorage(newState)
+
+      return newState
     }
 
     case 'DELETE_TODO': {
-      return state.filter(todo => todo.id !== id)
+      const newState = state.filter(todo => todo.id !== id)
+
+      updateLocalStorage(newState)
+
+      return newState
     }
 
     case 'UPDATE_TODO': {
       const { id } = actionPayload.todo
-      return state.map(todo => {
+      const newState = state.map(todo => {
         if (todo.id === id) {
           todo.description = actionPayload.value
         }
         return todo
       })
+
+      updateLocalStorage(newState)
+
+      return newState
     }
 
     case 'DONE_TODO': {
-      return state.map(todo => {
+      const newState = state.map(todo => {
         if (todo.id === id) {
           todo.done = !todo.done
         }
         return todo
       })
+
+      updateLocalStorage(newState)
+
+      return newState
     }
   }
 }
